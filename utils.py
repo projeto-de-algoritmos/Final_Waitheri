@@ -3,6 +3,9 @@ class Vect2:
         self.x = x
         self.y = y
 
+COLUMNS = 15
+ROWS = 13
+
 MAX_WIDTH_ROOM = 2
 MAX_HEIGHT_ROOM = 2
 MIN_WIDTH_ROOM = 2

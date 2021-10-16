@@ -8,8 +8,8 @@ import random as rand
 
 class Game:
     def __init__(self):
-        self.size = ut.Vect2(15, 13)
-        self.graph = [[0 for _ in range(self.size.x)] for _ in range(self.size.y)]
+        self.size = ut.Vect2(ut.COLUMNS, ut.ROWS)
+        self.graph = [[[0, False] for _ in range(self.size.x)] for _ in range(self.size.y)]
         self.rooms = self.__init_rooms()
         self.important_rooms = self.__find_rooms(0, 0, len(self.rooms)//2, len(self.rooms) - 1)
  
@@ -21,6 +21,8 @@ class Game:
         self.key = ut.Vect2(value[0], value[1])
         value = self.__generate_pos_in_room(1, 6)
         self.exit = ut.Vect2(value[0], value[1])
+
+        self.player.calculate_steps(self.exit, self.key, self.graph)
 
     def __init_rooms(self):
         rooms = []
@@ -75,7 +77,6 @@ class Game:
         self.rooms.append(room)
 
     def __generate_pos_in_room(self, room, value):
-        print(self.important_rooms[room])
         pos = (
             rand.randint(self.important_rooms[room].pos.x, self.important_rooms[room].pos.x + self.important_rooms[room].size.x - 1),
             rand.randint(self.important_rooms[room].pos.y, self.important_rooms[room].pos.y + self.important_rooms[room].size.y - 1)
@@ -83,5 +84,5 @@ class Game:
 
         #FIXME: verificar se esse valor não altera o caminho
         # que o prim vai gerar
-        self.graph[pos[1]][pos[0]] = value
+        self.graph[pos[1]][pos[0]][0] = value
         return pos

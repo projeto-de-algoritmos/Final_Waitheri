@@ -1,4 +1,5 @@
 import utils as ut
+import finder as fd
 
 
 class Player:
@@ -7,3 +8,10 @@ class Player:
         self.lifes = 3
         self.remaining_steps = 0
         self.has_key = False
+
+    def calculate_steps(self, start, finish, graph):
+        print(finish.x, finish.y)
+        finder = fd.Finder(start.x, start.y, finish.x, finish.y, graph.copy())
+        print(finder.path)
+        print(len(finder.path))
+        input()
