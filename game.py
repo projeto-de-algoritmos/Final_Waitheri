@@ -1,5 +1,6 @@
 import utils as ut
 import room as rm
+import player as pl
 import quick_select as qs
 
 import random as rand
@@ -10,9 +11,16 @@ class Game:
         self.size = ut.Vect2(15, 13)
         self.graph = [[0 for _ in range(self.size.x)] for _ in range(self.size.y)]
         self.rooms = self.__init_rooms()
-        self.important_rooms = self.__find_rooms(0, 0, 1, len(self.rooms) - 1)
+        self.important_rooms = self.__find_rooms(0, 0, len(self.rooms)//2, len(self.rooms) - 1)
  
         self.__generate_middle_room()
+
+        value = self.__generate_pos_in_room(0, 4)
+        self.player = pl.Player(value[0], value[1])
+        value = self.__generate_pos_in_room(2, 5)
+        self.key = ut.Vect2(value[0], value[1])
+        value = self.__generate_pos_in_room(1, 6)
+        self.exit = ut.Vect2(value[0], value[1])
 
     def __init_rooms(self):
         rooms = []
@@ -65,3 +73,15 @@ class Game:
         )
         room.init_nodes(self.graph)
         self.rooms.append(room)
+
+    def __generate_pos_in_room(self, room, value):
+        print(self.important_rooms[room])
+        pos = (
+            rand.randint(self.important_rooms[room].pos.x, self.important_rooms[room].pos.x + self.important_rooms[room].size.x - 1),
+            rand.randint(self.important_rooms[room].pos.y, self.important_rooms[room].pos.y + self.important_rooms[room].size.y - 1)
+        )
+
+        #FIXME: verificar se esse valor não altera o caminho
+        # que o prim vai gerar
+        self.graph[pos[1]][pos[0]] = value
+        return pos

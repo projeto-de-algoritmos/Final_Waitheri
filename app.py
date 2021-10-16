@@ -23,6 +23,16 @@ class App:
                 print()
             print()
 
+        # TODO: adicionar movimentos player Tauz
+        #  if pyxel.btnp(pyxel.KEY_UP):
+        #      self.game.player.pos.x -= 1
+        #  if pyxel.btnp(pyxel.KEY_DOWN):
+        #      self.game.player.pos.x += 1
+        #  if pyxel.btnp(pyxel.KEY_LEFT):
+        #      self.game.player.pos.y -= 1
+        #  if pyxel.btnp(pyxel.KEY_RIGHT):
+        #      self.game.player.pos.y += 1
+
     def draw(self):
         pyxel.cls(0)
 
@@ -34,5 +44,8 @@ class App:
 
                 if self.game.graph[j][i] == 2: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 32, 0, 16, 16, 0)
                 elif self.game.graph[j][i] == 3: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 48, 0, 16, 16, 7)
+                elif self.game.graph[j][i] == 4: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 0, 0, 16, 16, 0)
+                elif self.game.graph[j][i] == 5: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 48, 16, 16, 16, 7)
+                elif self.game.graph[j][i] == 6: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 16, 32, 16, 16, 0)
 
 App()
