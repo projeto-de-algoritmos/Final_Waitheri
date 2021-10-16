@@ -17,9 +17,9 @@ class App:
 
         if pyxel.btnp(pyxel.KEY_R):
             self.game = gm.Game()
-            for i in range(14):
-                for j in range(13):
-                    print(self.game.graph[j][i], end=' ')
+            for i in range(self.game.size.y):
+                for j in range(self.game.size.x):
+                    print(self.game.graph[i][j], end=' ')
                 print()
             print()
 
@@ -27,9 +27,12 @@ class App:
         pyxel.cls(0)
 
         pyxel.load("assets.pyxres")
-        for i in range(14):
-            for j in range(13):
-                # FIXME: Consertar esse demônio de renderização
-                if self.game.graph[j][i] == 0: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 16, 16, 32, 32)
+        for i in range(self.game.size.x):
+            for j in range(self.game.size.y):
+                if self.game.graph[j][i] == 0: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 16, 16, 16, 16)
+                else: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 0, 16, 16, 16)
+
+                if self.game.graph[j][i] == 2: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 32, 0, 16, 16, 0)
+                elif self.game.graph[j][i] == 3: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 48, 0, 16, 16, 7)
 
 App()

@@ -18,9 +18,9 @@ class Room:
                     continue
 
                 value = rand.randint(0, 100)
-                if value in range(ut.PER_FLOOR[0][0], ut.PER_FLOOR[0][1] + 1):
+                if value in range(ut.PER_WALL[0] + 1, ut.PER_FLOOR[0] + 1):
                     graph[j][i] = ut.PER_FLOOR[1]
-                elif value in range(ut.PER_WALL[0][0], ut.PER_WALL[0][1] + 1):
+                elif value in range(ut.PER_SPIKE[0] + 1, ut.PER_WALL[0] + 1):
                     graph[j][i] = ut.PER_WALL[1]
                 else:
                     graph[j][i] = ut.PER_SPIKE[1]

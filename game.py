@@ -7,8 +7,8 @@ import random as rand
 
 class Game:
     def __init__(self):
-        self.size = ut.Vect2(14, 13)
-        self.graph = [[0 for _ in range(14)] for _ in range(13)]
+        self.size = ut.Vect2(15, 13)
+        self.graph = [[0 for _ in range(self.size.x)] for _ in range(self.size.y)]
         self.rooms = self.__init_rooms()
         self.important_rooms = self.__find_rooms(0, 0, 1, len(self.rooms) - 1)
  
@@ -16,19 +16,19 @@ class Game:
 
     def __init_rooms(self):
         rooms = []
-        x_vec = [i for i in range(1, 11)]
-        y_vec = [i for i in range(1, 10)]
+        x_vec = [i for i in range(1, self.size.x - ut.MAX_WIDTH_ROOM - 1)]
+        y_vec = [i for i in range(1, self.size.y - ut.MAX_HEIGHT_ROOM - 1)]
         rand.shuffle(x_vec)
         rand.shuffle(y_vec)
 
         def validate_x(value, x):
-            if value + x > 13:
-                return value - (value + x - 13)
+            if value + x > self.size.x - 1:
+                return value - (value + x - self.size.x - 1)
             return value
 
         def validate_y(value, y):
-            if value + y > 12:
-                return value - (value + y - 12)
+            if value + y > self.size.y - 1:
+                return value - (value + y - self.size.y - 1)
             return value
 
         for i in range(ut.QTD_ROOMS):

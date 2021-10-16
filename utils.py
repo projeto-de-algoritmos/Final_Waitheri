@@ -10,6 +10,6 @@ MIN_HEIGHT_ROOM = 2
 
 QTD_ROOMS = 8
 
-PER_FLOOR = ([50, 100], 1)
-PER_WALL = ([16, 49], 2)
-PER_SPIKE = ([0, 15], 3)
+PER_FLOOR = (100, 1)
+PER_WALL = (49, 2)
+PER_SPIKE = (7, 3)
