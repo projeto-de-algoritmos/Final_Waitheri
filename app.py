@@ -1,4 +1,5 @@
 import game as gm
+import utils as ut
 
 import pyxel
 
@@ -42,10 +43,11 @@ class App:
                 if self.game.graph[j][i][0] == 0: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 16, 16, 16, 16)
                 else: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 0, 16, 16, 16)
 
-                if self.game.graph[j][i][0] == 2: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 32, 0, 16, 16, 0)
-                elif self.game.graph[j][i][0] == 3: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 48, 0, 16, 16, 7)
-                elif self.game.graph[j][i][0] == 4: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 0, 0, 16, 16, 0)
-                elif self.game.graph[j][i][0] == 5: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 48, 16, 16, 16, 7)
-                elif self.game.graph[j][i][0] == 6: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 16, 32, 16, 16, 0)
+                if self.game.graph[j][i][0] == ut.PER_WALL[1]: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 32, 0, 16, 16, 0)
+                elif self.game.graph[j][i][0] == ut.PER_SPIKE[1]: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 48, 0, 16, 16, 7)
 
+                if j == self.game.player.pos.y and i == self.game.player.pos.x: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 0, 0, 16, 16, 0)
+                elif j == self.game.key.y and i == self.game.key.x: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 48, 16, 16, 16, 7)
+                elif j == self.game.exit.y and i == self.game.exit.x: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 16, 32, 16, 16, 0)
+                
 App()

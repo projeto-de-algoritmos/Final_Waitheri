@@ -11,5 +11,5 @@ class Player:
 
     def calculate_steps(self, start, finish, graph):
         finder = fd.Finder(start.x, start.y, finish.x, finish.y, graph.copy())
-        print(finder.path)
-        print(len(finder.path))
+        print(finder.steps)
+        return finder.steps

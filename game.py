@@ -15,14 +15,14 @@ class Game:
  
         self.__generate_middle_room()
 
-        value = self.__generate_pos_in_room(0, 4)
+        value = self.__generate_pos_in_room(0, 1)
         self.player = pl.Player(value[0], value[1])
-        value = self.__generate_pos_in_room(2, 5)
+        value = self.__generate_pos_in_room(2, 1)
         self.key = ut.Vect2(value[0], value[1])
-        value = self.__generate_pos_in_room(1, 6)
+        value = self.__generate_pos_in_room(1, 1)
         self.exit = ut.Vect2(value[0], value[1])
 
-        self.player.calculate_steps(self.exit, self.key, self.graph)
+        self.steps = self.player.calculate_steps(self.key, self.exit, self.graph)
 
     def __init_rooms(self):
         rooms = []
@@ -78,8 +78,8 @@ class Game:
 
     def __generate_pos_in_room(self, room, value):
         pos = (
-            rand.randint(self.important_rooms[room].pos.x, self.important_rooms[room].pos.x + self.important_rooms[room].size.x - 1),
-            rand.randint(self.important_rooms[room].pos.y, self.important_rooms[room].pos.y + self.important_rooms[room].size.y - 1)
+            rand.randint(self.important_rooms[room].pos.x, self.important_rooms[room].pos.x + self.important_rooms[room].size.x - 2),
+            rand.randint(self.important_rooms[room].pos.y, self.important_rooms[room].pos.y + self.important_rooms[room].size.y - 2)
         )
 
         #FIXME: verificar se esse valor não altera o caminho

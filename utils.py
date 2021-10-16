@@ -3,6 +3,9 @@ class Vect2:
         self.x = x
         self.y = y
 
+    def __repr__(self):
+        return f'({self.x}, {self.y})'
+
 COLUMNS = 15
 ROWS = 13
 
