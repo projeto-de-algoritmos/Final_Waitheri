@@ -10,8 +10,6 @@ class Player:
         self.has_key = False
 
     def calculate_steps(self, start, finish, graph):
-        print(finish.x, finish.y)
         finder = fd.Finder(start.x, start.y, finish.x, finish.y, graph.copy())
         print(finder.path)
         print(len(finder.path))
-        input()

@@ -19,7 +19,7 @@ class Finder:
         if graph[x][y - 1][0] != 0 and not graph[x][y - 1][1]: possiblePath.append((x, y - 1))
         return possiblePath
 
-    def __calculate_distance(self, start_x, start_y, finish_x, finish_y):
+    def calculate_distance(self, start_x, start_y, finish_x, finish_y):
         return (finish_x - start_x) ** 2 + (finish_y - start_y) ** 2
 
     def aStar_finder(self, graph):
@@ -28,19 +28,19 @@ class Finder:
         hp.heappush(self.heap, (0, (0, 0), self.start, self.start))
 
         while self.heap:
-            print(self.heap)
             _, (G_C, _), (new_x, new_y), (cur_x, cur_y) = hp.heappop(self.heap)
             graph[new_x][new_y][1] = True
             path.insert(0, ((cur_x, cur_y), (new_x, new_y)))
 
             if (new_x, new_y) == self.finish:
+                #  print('entrou ', self.path)
                 return path
 
             possible_path = self.__find_possible_path(new_x, new_y, graph)
             for n in possible_path:
                 G = G_C + 1
-                F = self.__calculate_distance(n[0], n[1], self.finish[0], self.finish[1])
-                H = G + F * graph[n[0]][n[1]][0]
+                F = self.calculate_distance(n[0], n[1], self.finish[0], self.finish[1]) * graph[n[0]][n[1]][0]
+                H = G + F
                 hp.heappush(self.heap, (F, (G, H), n, (new_x, new_y)))
 
 
