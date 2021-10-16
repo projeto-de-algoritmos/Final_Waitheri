@@ -7,21 +7,23 @@ import random as rand
 
 class Game:
     def __init__(self):
-        self.size = ut.Vect2(15, 13)
-        self.graph = [[0 for _ in range(15)] for _ in range(13)]
+        self.size = ut.Vect2(14, 13)
+        self.graph = [[0 for _ in range(14)] for _ in range(13)]
         self.rooms = self.__init_rooms()
-        self.important_rooms = self.find_rooms(0, 0, 1, len(self.rooms) - 1)
+        self.important_rooms = self.__find_rooms(0, 0, 1, len(self.rooms) - 1)
+ 
+        self.__generate_middle_room()
 
     def __init_rooms(self):
         rooms = []
-        x_vec = [i for i in range(0, 12)]
-        y_vec = [i for i in range(0, 10)]
+        x_vec = [i for i in range(1, 11)]
+        y_vec = [i for i in range(1, 10)]
         rand.shuffle(x_vec)
         rand.shuffle(y_vec)
 
         def validate_x(value, x):
-            if value + x > 14:
-                return value - (value + x - 14)
+            if value + x > 13:
+                return value - (value + x - 13)
             return value
 
         def validate_y(value, y):
@@ -42,7 +44,7 @@ class Game:
 
         return rooms
 
-    def find_rooms(self, ordering, *args):
+    def __find_rooms(self, ordering, *args):
         important_rooms = []
         for value in args:
             qs.quickSelect(self.rooms, 0, len(self.rooms) - 1, value, ordering)
@@ -50,9 +52,16 @@ class Game:
 
         return important_rooms
 
-g = Game()
-print(g.important_rooms)
-for i in range(13):
-    for j in range(15):
-        print(g.graph[i][j], end=' ')
-    print()
+    def __generate_middle_room(self):
+        important_rooms_y = self.__find_rooms(1, 0, 1, len(self.rooms) - 1)
+        width = self.important_rooms[2].pos.x - self.important_rooms[0].pos.x
+        height = important_rooms_y[2].pos.y - important_rooms_y[0].pos.y
+
+        room = rm.Room(
+            self.important_rooms[0].pos.x + self.important_rooms[0].size.x//2,
+            important_rooms_y[0].pos.y + important_rooms_y[0].size.y//2,
+            width, 
+            height
+        )
+        room.init_nodes(self.graph)
+        self.rooms.append(room)
