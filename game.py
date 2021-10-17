@@ -4,6 +4,7 @@ import player as pl
 import quick_select as qs
 
 import random as rand
+from copy import deepcopy
 
 
 class Game:
@@ -22,7 +23,9 @@ class Game:
         value = self.__generate_pos_in_room(1, 1)
         self.exit = ut.Vect2(value[0], value[1])
 
-        self.steps = self.player.calculate_steps(self.key, self.exit, self.graph)
+        self.steps = self.player.calculate_steps(self.key, self.exit, deepcopy(self.graph))
+        self.steps += self.player.calculate_steps(self.player.pos, self.key, deepcopy(self.graph))
+        print(self.steps)
 
     def __init_rooms(self):
         rooms = []
@@ -82,7 +85,5 @@ class Game:
             rand.randint(self.important_rooms[room].pos.y, self.important_rooms[room].pos.y + self.important_rooms[room].size.y - 2)
         )
 
-        #FIXME: verificar se esse valor não altera o caminho
-        # que o prim vai gerar
         self.graph[pos[1]][pos[0]][0] = value
         return pos

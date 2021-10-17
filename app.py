@@ -18,11 +18,6 @@ class App:
 
         if pyxel.btnp(pyxel.KEY_R):
             self.game = gm.Game()
-            for i in range(self.game.size.y):
-                for j in range(self.game.size.x):
-                    print(self.game.graph[i][j][0], end=' ')
-                print()
-            print()
 
         # TODO: adicionar movimentos player Tauz
         #  if pyxel.btnp(pyxel.KEY_UP):
