@@ -29,6 +29,10 @@ class App:
         if pyxel.btnp(pyxel.KEY_RIGHT):
             self.game.player.move_right(self.game.graph)
 
+        #TODO: adicionar tela de final de jogo
+        if self.game.player.lifes <= 0:
+            self.game = gm.Game()
+
     def draw(self):
         pyxel.cls(0)
 
@@ -46,5 +50,7 @@ class App:
                 elif j == self.game.key.y and i == self.game.key.x: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 48, 16, 16, 16, 7)
                 elif j == self.game.exit.y and i == self.game.exit.x: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 0, 48, 16, 16, 0)
 
-        tx.Centered_text(str(self.game.player.lifes), 230, 7, 10).draw()
+        tx.Centered_text(str(self.game.player.lifes), 220, 7, 10).draw()
+        tx.Centered_text(str(self.game.player.remaining_steps), 230, 7, 10).draw()
+        tx.Centered_text(str(self.game.player.coins), 240, 7, 10).draw()
 App()

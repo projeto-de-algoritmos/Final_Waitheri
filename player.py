@@ -42,6 +42,10 @@ class Player:
             self.__pick_coin(graph, self.pos.x, self.pos.y - 1)
             self.pos.y -= 1
 
+        if self.remaining_steps < 0:
+            self.lifes -= 1
+            self.remaining_steps += 1
+
     def move_down(self, graph):
         if graph[self.pos.y + 1][self.pos.x][0] == 1:
             self.pos.y += 1
@@ -55,6 +59,10 @@ class Player:
         elif graph[self.pos.y + 1][self.pos.x][0] == 4:
             self.__pick_coin(graph, self.pos.x, self.pos.y + 1)
             self.pos.y += 1
+
+        if self.remaining_steps < 0:
+            self.lifes -= 1
+            self.remaining_steps += 1
 
     def move_left(self, graph):
         if graph[self.pos.y][self.pos.x - 1][0] == 1:
@@ -70,6 +78,10 @@ class Player:
             self.__pick_coin(graph, self.pos.x - 1, self.pos.y)
             self.pos.x -= 1
 
+        if self.remaining_steps < 0:
+            self.lifes -= 1
+            self.remaining_steps += 1
+
     def move_right(self, graph):
         if graph[self.pos.y][self.pos.x + 1][0] == 1:
             self.pos.x += 1
@@ -83,3 +95,7 @@ class Player:
         elif graph[self.pos.y][self.pos.x + 1][0] == 4:
             self.__pick_coin(graph, self.pos.x + 1, self.pos.y)
             self.pos.x += 1
+
+        if self.remaining_steps < 0:
+            self.lifes -= 1
+            self.remaining_steps += 1

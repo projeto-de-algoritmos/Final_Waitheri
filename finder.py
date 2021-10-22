@@ -27,9 +27,6 @@ class Finder:
         while self.heap:
             _, cur_v = hp.heappop(self.heap)
 
-            if cur_v == self.finish:
-                return self.costs[self.finish[1]][self.finish[0]]
-
             possible_path = self.find_possible_path(cur_v[0], cur_v[1], graph)
             graph[cur_v[1]][cur_v[0]][1] = True
 
@@ -41,3 +38,5 @@ class Finder:
                     if n_cost < o_cost or o_cost == -1:
                         hp.heappush(self.heap, (n_cost, (n[1], n[0])))
                         self.costs[n[0]][n[1]] = n_cost
+
+        return self.costs[self.finish[1]][self.finish[0]]
