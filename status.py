@@ -1,15 +1,18 @@
 import utils as ut
-import game as gm
 import text as tx
-
+import botao as bt
 import pyxel
+import game as gm
 
 
-def update_menu():
-    ...
+def update_menu(game):
+    if game.botao_start.update() == 1:
+        game.game_status = ut.PLAYING_STATUS
 
-def draw_menu():
-    ...
+def draw_menu(game):
+    game.botao_start.draw()
+    pyxel.blt((ut.TAM_SCREEN/2) - 60, 53, 1, 64, 8, 175, 108)
+
 
 def update_playing(game):
     if pyxel.btnp(pyxel.KEY_UP):
@@ -74,8 +77,10 @@ def update_discount():
 def draw_discount():
     ...
 
-def update_final():
+def update_final(game, rooms_completed):
     ...
 
-def draw_final():
-    ...
+
+def draw_final(game):
+    pyxel.blt((ut.TAM_SCREEN/2) - 60, 53, 1, 88, 136, 202, 151)
+    game.botao_final.draw()

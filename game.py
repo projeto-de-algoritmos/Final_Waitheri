@@ -2,7 +2,7 @@ import utils as ut
 import room as rm
 import player as pl
 import quick_select as qs
-
+import botao as bt
 import random as rand
 from copy import deepcopy
 
@@ -27,6 +27,10 @@ class Game:
 
         self.player.calculate_steps(self.key, self.exit, deepcopy(self.graph))
         self.player.calculate_steps(self.player.pos, self.key, deepcopy(self.graph))
+
+        #MENU
+        self.botao_start = bt.Normal_button(ut.TAM_SCREEN/2 - 20, ut.TAM_SCREEN//1.5, 'Comecar Jogo')
+        self.botao_final = bt.Normal_button(ut.TAM_SCREEN/2 - 20, ut.TAM_SCREEN//1.5, 'Reiniciar')
 
     def __init_rooms(self):
         rooms = []

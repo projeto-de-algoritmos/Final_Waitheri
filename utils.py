@@ -6,6 +6,9 @@ class Vect2:
     def __repr__(self):
         return f'({self.x}, {self.y})'
 
+# Screen
+TAM_SCREEN = 256
+
 # Possíveis estados do jogo
 MENU_STATUS = 0
 PLAYING_STATUS = 1
