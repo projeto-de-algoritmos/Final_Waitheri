@@ -8,7 +8,8 @@ from copy import deepcopy
 
 
 class Game:
-    def __init__(self):
+    def __init__(self, initial_status):
+        self.game_status = initial_status
         self.size = ut.Vect2(ut.COLUMNS, ut.ROWS)
         self.graph = [[[0, False] for _ in range(self.size.x)] for _ in range(self.size.y)]
         self.rooms = self.__init_rooms()
