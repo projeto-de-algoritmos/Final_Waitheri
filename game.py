@@ -23,9 +23,8 @@ class Game:
         value = self.__generate_pos_in_room(1, 1)
         self.exit = ut.Vect2(value[0], value[1])
 
-        self.steps = self.player.calculate_steps(self.key, self.exit, deepcopy(self.graph))
-        self.steps += self.player.calculate_steps(self.player.pos, self.key, deepcopy(self.graph))
-        print(self.steps)
+        self.player.calculate_steps(self.key, self.exit, deepcopy(self.graph))
+        self.player.calculate_steps(self.player.pos, self.key, deepcopy(self.graph))
 
     def __init_rooms(self):
         rooms = []

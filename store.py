@@ -22,7 +22,7 @@ class Store:
         for i in range(ut.AMOUNT_ITENS_STORE):
             itens.append(Item(
                 item = rand.choice(list(ut.STORE_ITENS)),
-                amount = rand.choice(list(ut.STORE_ITENS[item][0])),
+                amount = rand.choice(ut.STORE_ITENS[item][0]),
                 price = rand.randint(ut.STORE_ITENS[item][1][0],ut.STORE_ITENS[item][1][1])
             ))
 
@@ -37,6 +37,18 @@ class Store:
 
     def apply_discount(self, winner):
         for item in self.itens:
-            if winner == 1: item.price *= (100 - self.discount[0])
-            else: item.price *= (100 - self.discount[0])
+            if winner == 1: item.price -= self.dicount[0]
+            else: item.price += self.discount[1]
 
+    def play_challenge(self, qtdMoedas, retira1, retira2):
+        memoization = [0 for i in range(qtdMoedas+1)]
+        memoization[0] = False
+        memoization[1] = True
+
+        for i in range(2, qtdMoedas+1):
+            if (i - 1 >= 0 and not memoization[i - 1]): memoization[i] = True
+            elif (i - retira1 >= 0 and not memoization[i - retira1]): memoization[i] = True
+            elif (i - retira2 >= 0 and not memoization[i - retira2]): memoization[i] = True
+            else: memoization[i] = False
+
+        return memoization

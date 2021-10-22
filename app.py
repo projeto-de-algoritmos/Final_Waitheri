@@ -1,5 +1,6 @@
 import game as gm
 import utils as ut
+import text as tx
 
 import pyxel
 
@@ -19,15 +20,14 @@ class App:
         if pyxel.btnp(pyxel.KEY_R):
             self.game = gm.Game()
 
-        # TODO: adicionar movimentos player Tauz
-        #  if pyxel.btnp(pyxel.KEY_UP):
-        #      self.game.player.pos.x -= 1
-        #  if pyxel.btnp(pyxel.KEY_DOWN):
-        #      self.game.player.pos.x += 1
-        #  if pyxel.btnp(pyxel.KEY_LEFT):
-        #      self.game.player.pos.y -= 1
-        #  if pyxel.btnp(pyxel.KEY_RIGHT):
-        #      self.game.player.pos.y += 1
+        if pyxel.btnp(pyxel.KEY_UP):
+            self.game.player.move_up(self.game.graph)
+        if pyxel.btnp(pyxel.KEY_DOWN):
+            self.game.player.move_down(self.game.graph)
+        if pyxel.btnp(pyxel.KEY_LEFT):
+            self.game.player.move_left(self.game.graph)
+        if pyxel.btnp(pyxel.KEY_RIGHT):
+            self.game.player.move_right(self.game.graph)
 
     def draw(self):
         pyxel.cls(0)
@@ -40,9 +40,11 @@ class App:
 
                 if self.game.graph[j][i][0] == ut.PER_WALL[1]: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 32, 0, 16, 16, 0)
                 elif self.game.graph[j][i][0] == ut.PER_SPIKE[1]: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 48, 0, 16, 16, 7)
+                elif self.game.graph[j][i][0] == 4: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 16, 0, 16, 16, 0)
 
-                if j == self.game.player.pos.y and i == self.game.player.pos.x: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 0, 48, 16, 16, 0)
+                if j == self.game.player.pos.y and i == self.game.player.pos.x: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 16, 32, 16, 16, 0)
                 elif j == self.game.key.y and i == self.game.key.x: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 48, 16, 16, 16, 7)
-                elif j == self.game.exit.y and i == self.game.exit.x: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 16, 32, 16, 16, 0)
-                
+                elif j == self.game.exit.y and i == self.game.exit.x: pyxel.blt(8 + 16*i, 8 + 16*j, 0, 0, 48, 16, 16, 0)
+
+        tx.Centered_text(str(self.game.player.lifes), 230, 7, 10).draw()
 App()
