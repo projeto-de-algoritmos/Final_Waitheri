@@ -6,6 +6,13 @@ class Vect2:
     def __repr__(self):
         return f'({self.x}, {self.y})'
 
+# Possíveis estados do jogo
+MENU_STATUS = 0
+PLAYING_STATUS = 1
+STORE_STATUS = 2
+DISCOUNT_STATUS = 3
+FINAL_STATUS = 4
+
 # Tamanho da matriz do jogo
 COLUMNS = 15
 ROWS = 13
