@@ -9,8 +9,11 @@ class App:
         pyxel.init(256, 256, caption="")
         
         pyxel.mouse(True)
+        pyxel.load("assets.pyxres")
+
         #FIXME: Trocar para MENU_STATUS
         self.game = gm.Game(ut.PLAYING_STATUS)
+        self.rooms_completed = 0
 
         pyxel.run(self.update, self.draw)
 
@@ -20,16 +23,21 @@ class App:
 
         if self.game.game_status == ut.MENU_STATUS:
             st.update_menu()
-        if self.game.game_status == ut.PLAYING_STATUS:
+        elif self.game.game_status == ut.PLAYING_STATUS:
             st.update_playing(self.game)
-        if self.game.game_status == ut.STORE_STATUS:
-            st.update_store()
-        if self.game.game_status == ut.DISCOUNT_STATUS:
+        elif self.game.game_status == ut.STORE_STATUS:
+            st.update_store(self.game)
+        elif self.game.game_status == ut.DISCOUNT_STATUS:
             st.update_discount()
-        if self.game.game_status == ut.FINAL_STATUS:
+        elif self.game.game_status == ut.FINAL_STATUS:
             st.update_final()
 
+        if self.game.game_status == ut.NEW_ROOM_STATUS:
+            self.rooms_completed += 1
+            self.game = gm.Game(ut.PLAYING_STATUS)
+
         if pyxel.btnp(pyxel.KEY_R):
+            self.rooms_completed = 0
             self.game = gm.Game(ut.PLAYING_STATUS)
 
     def draw(self):
@@ -37,13 +45,13 @@ class App:
 
         if self.game.game_status == ut.MENU_STATUS:
             st.draw_menu()
-        if self.game.game_status == ut.PLAYING_STATUS:
-            st.draw_playing(self.game)
-        if self.game.game_status == ut.STORE_STATUS:
+        elif self.game.game_status == ut.PLAYING_STATUS:
+            st.draw_playing(self.game, self.rooms_completed)
+        elif self.game.game_status == ut.STORE_STATUS:
             st.draw_store()
-        if self.game.game_status == ut.DISCOUNT_STATUS:
+        elif self.game.game_status == ut.DISCOUNT_STATUS:
             st.draw_discount()
-        if self.game.game_status == ut.FINAL_STATUS:
+        elif self.game.game_status == ut.FINAL_STATUS:
             st.draw_final()
 
 App()
