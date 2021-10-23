@@ -152,6 +152,7 @@ def update_discount(game, buttons, store_buttons):
         game.store.apply_discount(discount_game.discount, discount_game.player)
         for i in range(len(game.store.itens)):
             store_buttons[i].update_value(str(game.store.itens[i]))
+        store_buttons[4].valid = False
 
 #TODO: Ajeitar a posição dos botões
 def draw_discount(game, buttons):
