@@ -14,6 +14,7 @@ class App:
         #FIXME: Trocar para MENU_STATUS or PLAYING_STATUS
         self.game = gm.Game(ut.MENU_STATUS)
         self.rooms_completed = 0
+        self.store_buttons = st.generate_store_buttons(self.game)
 
         pyxel.run(self.update, self.draw)
 
@@ -26,7 +27,7 @@ class App:
         elif self.game.game_status == ut.PLAYING_STATUS:
             st.update_playing(self.game)
         elif self.game.game_status == ut.STORE_STATUS:
-            st.update_store(self.game)
+            st.update_store(self.game, self.store_buttons)
         elif self.game.game_status == ut.DISCOUNT_STATUS:
             st.update_discount()
         elif self.game.game_status == ut.FINAL_STATUS:
@@ -34,11 +35,16 @@ class App:
 
         if self.game.game_status == ut.NEW_ROOM_STATUS:
             self.rooms_completed += 1
-            self.game = gm.Game(ut.PLAYING_STATUS)
+            new_game = gm.Game(ut.PLAYING_STATUS)
+            new_game.player.lifes = self.game.player.lifes
+            new_game.player.coins= self.game.player.coins
+            self.game = new_game
+            self.store_buttons = st.generate_store_buttons(self.game)
 
         if pyxel.btnp(pyxel.KEY_R) or ((self.game.botao_final.update() == 1) and self.game.game_status == ut.FINAL_STATUS):
             self.rooms_completed = 0
             self.game = gm.Game(ut.MENU_STATUS)
+            self.store_buttons = st.generate_store_buttons(self.game)
 
     def draw(self):
         pyxel.cls(0)
@@ -48,7 +54,7 @@ class App:
         elif self.game.game_status == ut.PLAYING_STATUS:
             st.draw_playing(self.game, self.rooms_completed)
         elif self.game.game_status == ut.STORE_STATUS:
-            st.draw_store()
+            st.draw_store(self.game, self.store_buttons)
         elif self.game.game_status == ut.DISCOUNT_STATUS:
             st.draw_discount()
         elif self.game.game_status == ut.FINAL_STATUS:

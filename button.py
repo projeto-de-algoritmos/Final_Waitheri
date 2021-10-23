@@ -2,6 +2,7 @@ import pyxel
 import random
 import math
 
+
 class Vect2:
     def __init__(self, x, y):
         self.x = x
@@ -12,11 +13,14 @@ class Normal_button:
         self.pos = Vect2(x, y)
         self.size = len(text) * pyxel.FONT_WIDTH - 6
         self.text = text
+        self.valid = True
 
     def update(self):
         mouse_pos = [pyxel.mouse_x, pyxel.mouse_y]
-        if pyxel.btnp(pyxel.MOUSE_LEFT_BUTTON) and self.__check_button_hitbox(mouse_pos):
+        if pyxel.btnp(pyxel.MOUSE_LEFT_BUTTON) and self.__check_button_hitbox(mouse_pos) and self.valid:
             return 1
+        return 0
+
     def update_value(self, text):
         self.text = text
 

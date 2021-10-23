@@ -8,7 +8,7 @@ class Player:
     def __init__(self, x, y):
         self.pos = ut.Vect2(x, y)
         self.lifes = 3
-        self.coins = 0
+        self.coins = 1000
         self.remaining_steps = 0
         self.has_key = False
 
