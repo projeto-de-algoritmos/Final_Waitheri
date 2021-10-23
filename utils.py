@@ -41,6 +41,9 @@ PER_COIN = 30
 # Quantidade de itens na loja (recomendado deixar no máximo 4)
 AMOUNT_ITENS_STORE = 4
 
+# Abrir a loja apenas uma vez por sala
+ONE_STORE_PER_ROOM = False
+
 # Dicionário de itens da loja no formato:
 # dict = {"Nome": (probabilidade, [qtd, ...], (preçoMin, preçoMax))}
 #TODO: se der tempo, adicionar habilidade
@@ -48,18 +51,20 @@ STORE_ITENS = {
     "Coracao": (
         30,
         [1, 2],
-        (4, 7)
+        (5, 7)
     ),
     "Passo": (
         100,
         [2, 3, 4],
-        (2, 8)
+        (3, 7)
     )
 }
 
-# dict = [(desconto, (qtdMoedas, qtd1, qtd2), descontoAum]
+# Possíveis descontos na loja no formato
+# vec = [((desconto, descontoDeAumento), (qtdMoedas, qtd1, qtd2))]
 DISCOUNTS = [
-        (20, (), 10),
-        (30, (), 15),
-        (40, (), 20),
-        (50, (), 25)]
+    ((2, 1), (14, 2, 5)),
+    ((3, 2), (10, 3, 4)),
+    ((4, 3), (15, 3, 6)),
+    ((5, 4), (17, 4, 5))
+]

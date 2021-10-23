@@ -16,6 +16,7 @@ class App:
         self.game = gm.Game(ut.STORE_STATUS)
         self.rooms_completed = 0
         self.store_buttons = st.generate_store_buttons(self.game)
+        self.discount_buttons = []
 
         pyxel.run(self.update, self.draw)
 
@@ -30,7 +31,9 @@ class App:
         elif self.game.game_status == ut.STORE_STATUS:
             st.update_store(self.game, self.store_buttons)
         elif self.game.game_status == ut.DISCOUNT_STATUS:
-            st.update_discount()
+            if self.discount_buttons == []: 
+                self.discount_buttons = st.generate_discount_buttons(self.game)
+            else: st.update_discount(self.game, self.discount_buttons, self.store_buttons)
         elif self.game.game_status == ut.FINAL_STATUS:
             st.update_final(self.game, self.rooms_completed)
 
@@ -57,7 +60,7 @@ class App:
         elif self.game.game_status == ut.STORE_STATUS:
             st.draw_store(self.game, self.store_buttons)
         elif self.game.game_status == ut.DISCOUNT_STATUS:
-            st.draw_discount()
+            st.draw_discount(self.game, self.discount_buttons)
         elif self.game.game_status == ut.FINAL_STATUS:
             st.draw_final(self.game)
 

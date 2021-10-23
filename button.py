@@ -23,6 +23,7 @@ class Normal_button:
 
     def update_value(self, text):
         self.text = text
+        self.size = len(text) * pyxel.FONT_WIDTH - 6
 
     def draw(self):
         pyxel.rect(self.pos.x, self.pos.y + 2, self.size, 15, 3)

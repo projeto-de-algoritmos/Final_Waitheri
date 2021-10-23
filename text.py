@@ -3,10 +3,10 @@ import utils as ut
 
 
 class Centered_text:
-    def __init__(self, text, y, col, x = 0):
+    def __init__(self, text, y, col, x):
         self.text = text
         self.tam = len(self.text) * pyxel.FONT_WIDTH
-        self.x = ut.WIDTH/2 - self.tam/2 if x == 0 else x
+        self.x = x
         self.y = y
         self.col = col
 

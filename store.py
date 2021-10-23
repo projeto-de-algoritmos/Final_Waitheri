@@ -16,11 +16,8 @@ class Item:
         return self.amount * self.price
 
 class Store:
-    #TODO: a princípio o discount é uma tupla (desconto se vitória, aumento se perda)
-    def __init__(self, discount):
+    def __init__(self):
         self.itens = self.__init_itens()
-        self.discount = discount
-        # already_player é para evitar que ele fique pedindo descontos
         self.already_played = False
 
     def __init_itens(self):
@@ -36,26 +33,12 @@ class Store:
             itens.append(Item(item, amount, price))
         return itens
 
-    #TODO: lembrar de subtrair o valor no app e aplicar o efeito do item
     def validate_purchase(self, money, item):
         if money - item.get_value() >= 0:
             return True
         return False
 
-    def apply_discount(self, winner):
+    def apply_discount(self, discount, winner):
         for item in self.itens:
-            if winner == 1: item.price -= self.dicount[0]
-            else: item.price += self.discount[1]
-
-    def play_challenge(self, qtdMoedas, retira1, retira2):
-        memoization = [0 for i in range(qtdMoedas+1)]
-        memoization[0] = False
-        memoization[1] = True
-
-        for i in range(2, qtdMoedas+1):
-            if (i - 1 >= 0 and not memoization[i - 1]): memoization[i] = True
-            elif (i - retira1 >= 0 and not memoization[i - retira1]): memoization[i] = True
-            elif (i - retira2 >= 0 and not memoization[i - retira2]): memoization[i] = True
-            else: memoization[i] = False
-
-        return memoization
+            if winner == 1: item.price += discount[0]
+            else: item.price -= discount[1]

@@ -1,9 +1,11 @@
 import utils as ut
 import text as tx
 import button as bt
+import coin as cs
+import game as gm
 
 import pyxel
-import game as gm
+import random as rand
 
 
 def update_menu(game):
@@ -33,13 +35,9 @@ def update_playing(game):
     if game.player.lifes <= 0:
         game.game_status = ut.FINAL_STATUS
 
-    # Caso se prefira abrir a loja apenas uma vez por quarto
-    #  if pyxel.btnp(pyxel.KEY_L) and not game.opened_store:
-    #      game.opened_store = True
-    #      game.game_status = ut.STORE_STATUS
-
-    if pyxel.btnp(pyxel.KEY_L):
+    if pyxel.btnp(pyxel.KEY_L) and not game.opened_store:
         game.game_status = ut.STORE_STATUS
+        game.opened_store = True and ut.ONE_STORE_PER_ROOM
 
 def draw_playing(game, rooms_completed):
     for i in range(game.size.x):
@@ -68,6 +66,7 @@ def draw_playing(game, rooms_completed):
     tx.Centered_text(str(game.player.coins), 240, 7, 10).draw()
     tx.Centered_text(str(rooms_completed), 250, 7, 10).draw()
 
+#TODO: Se der tempo adicionar o botão de resetar cartas
 def generate_store_buttons(game):
     buttons = []
     for i in range(len(game.store.itens)):
@@ -83,12 +82,6 @@ def generate_store_buttons(game):
         'Desconto'
     ))
 
-    #TODO: Se der tempo adicionar o botão de restart das cartas
-    #  buttons.append(bt.Normal_button(
-    #      len(str(item)) + (20 if item.get_value() < 10 else 16) + i * 58,
-    #      169, 
-    #      str(item)
-    #  ))
     return buttons
 
 def update_store(game, buttons):
@@ -110,6 +103,11 @@ def update_store(game, buttons):
 
     if buttons[len(game.store.itens)].update() == 1:
         game.game_status = ut.DISCOUNT_STATUS
+        discount = rand.choice(ut.DISCOUNTS)
+        game.discount_game = cs.Coin_game(
+            discount[1][0], discount[1][1], discount[1][2],
+            discount[0]
+        )
 
 def draw_store(game, buttons):
     for i in range(len(game.store.itens)):
@@ -126,11 +124,39 @@ def draw_store(game, buttons):
     for i in range(len(game.store.itens), len(game.store.itens) + 1):
         buttons[i].draw()
 
-def update_discount():
-    ...
+def generate_discount_buttons(game):
+    buttons = []
+    buttons.append(bt.Normal_button(30 * 0 + 58, 10, str(1)))
+    buttons.append(bt.Normal_button(30 * 1 + 58, 10, str(game.discount_game.retira1)))
+    buttons.append(bt.Normal_button(30 * 2 + 58, 10, str(game.discount_game.retira2)))
+    return buttons
 
-def draw_discount():
-    ...
+def update_discount(game, buttons, store_buttons):
+    discount_game = game.discount_game
+    if discount_game.player == 1:
+        if buttons[0].update() == 1 and discount_game.qtdMoedas - 1 >= 0:
+            discount_game.qtdMoedas -= 1
+            discount_game.player = 0
+        elif buttons[1].update() == 1 and discount_game.qtdMoedas - discount_game.retira1 >= 0:
+            discount_game.qtdMoedas -= discount_game.retira1
+            discount_game.player = 0
+        elif buttons[2].update() == 1 and discount_game.qtdMoedas - discount_game.retira2 >= 0:
+            discount_game.qtdMoedas -= discount_game.retira2
+            discount_game.player = 0
+    elif discount_game.qtdMoedas > 0 and discount_game.player == 0:
+        discount_game.qtdMoedas -= discount_game.calculate_move()
+        discount_game.player = 1
+        
+    if discount_game.qtdMoedas == 0:
+        game.game_status = ut.STORE_STATUS
+        game.store.apply_discount(discount_game.discount, discount_game.player)
+        for i in range(len(game.store.itens)):
+            store_buttons[i].update_value(str(game.store.itens[i]))
+
+#TODO: Ajeitar a posição dos botões
+def draw_discount(game, buttons):
+    for button in buttons: button.draw()
+    tx.Centered_text(str(game.discount_game.qtdMoedas), 240, 7, 10).draw()
 
 def update_final(game, rooms_completed):
     ...

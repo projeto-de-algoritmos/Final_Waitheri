@@ -1,9 +1,11 @@
 class Coin_game:
-    def __init__(self, qtdMoedas, retira1, retira2):
+    def __init__(self, qtdMoedas, retira1, retira2, discount):
         self.qtdMoedas = qtdMoedas
         self.retira1 = retira1
         self.retira2 = retira2
-        self.memoization = play_challenge()
+        self.player = 1
+        self.discount = discount
+        self.memoization = self.play_challenge()
 
     def play_challenge(self):
         memoization = [0 for i in range(self.qtdMoedas+1)]
