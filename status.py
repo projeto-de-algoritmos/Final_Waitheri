@@ -61,6 +61,7 @@ def draw_playing(game, rooms_completed):
             elif j == game.exit.y and i == game.exit.x: 
                 pyxel.blt(8 + 16*i, 8 + 16*j, 0, 0, 48, 16, 16, 0)
 
+    draw_frame_boarding()
     tx.Centered_text(str(game.player.lifes), 220, 7, 10).draw()
     tx.Centered_text(str(game.player.remaining_steps), 230, 7, 10).draw()
     tx.Centered_text(str(game.player.coins), 240, 7, 10).draw()
@@ -167,3 +168,6 @@ def draw_final(game):
     #TODO: adicionar quantidade de moedas coletadas
     #TODO: adicionar quantidade de quartos percorridos
     game.botao_final.draw()
+
+def draw_frame_boarding():
+    pyxel.blt(0, 0, 2, 0, 0, 256, 256, 0)
