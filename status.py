@@ -13,6 +13,7 @@ def update_menu(game):
         game.game_status = ut.PLAYING_STATUS
 
 def draw_menu(game):
+    draw_frame_boarding()
     game.botao_start.draw()
     pyxel.blt((ut.TAM_SCREEN/2) - 60, 53, 1, 64, 8, 175, 108)
 
@@ -111,6 +112,9 @@ def update_store(game, buttons):
         )
 
 def draw_store(game, buttons):
+    draw_frame_boarding()
+    pyxel.blt(80, 25, 1, 104, 160, 199, 175)
+
     for i in range(len(game.store.itens)):
         item = game.store.itens[i]
         tx.Centered_text(
@@ -120,6 +124,7 @@ def draw_store(game, buttons):
             18 + i * 58,
         ).draw()
         pyxel.blt(18 + i * 58, 80, 0, 0, 64, 48, 64, 0)
+
         buttons[i].draw()
 
     for i in range(len(game.store.itens), len(game.store.itens) + 1):
@@ -157,6 +162,7 @@ def update_discount(game, buttons, store_buttons):
 
 #TODO: Ajeitar a posição dos botões
 def draw_discount(game, buttons):
+    draw_frame_boarding()
     for button in buttons: button.draw()
     tx.Centered_text(str(game.discount_game.qtdMoedas), 240, 7, 10).draw()
 
