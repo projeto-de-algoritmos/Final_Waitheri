@@ -24,6 +24,7 @@ MAX_HEIGHT_ROOM = 2
 MIN_WIDTH_ROOM = 2
 MIN_HEIGHT_ROOM = 2
 
+# Opção de quantidade de quartos na geração
 QTD_ROOMS = 8
 
 # (porcentagem, valorNaMatriz)
@@ -34,24 +35,24 @@ PER_SPIKE = (7, 3)
 # Porcentagem de cair moeda quando quebrar a caixa
 PER_COIN = 30
 
-# Quantidade de itens na loja (recomendado deixar 3)
-AMOUNT_ITENS_STORE = 3
+# Quantidade de itens na loja (recomendado deixar no máximo 4)
+AMOUNT_ITENS_STORE = 4
 
-# dict = {"Nome": ([qtd], (preçoMin, preçoMax))}
-#FIXME: talvez seja necessário adicionar uma identificação pra quando for desenhar na tela
+# Dicionário de itens da loja no formato:
+# dict = {"Nome": (probabilidade, [qtd, ...], (preçoMin, preçoMax))}
+#TODO: se der tempo, adicionar habilidade
 STORE_ITENS = {
-        "Coração": (
-            [1, 2],
-            (4, 7)
-        ),
-        "Passo": (
-            [2, 3, 4],
-            (2, 8)
-        ),
-        "Habilidade": (
-            [1],
-            (8, 10)
-        )}
+    "Coracao": (
+        30,
+        [1, 2],
+        (4, 7)
+    ),
+    "Passo": (
+        100,
+        [2, 3, 4],
+        (2, 8)
+    )
+}
 
 # dict = [(desconto, (qtdMoedas, qtd1, qtd2), descontoAum]
 DISCOUNTS = [

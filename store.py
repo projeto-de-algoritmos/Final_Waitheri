@@ -9,6 +9,12 @@ class Item:
         self.amount = amount
         self.price = price
 
+    def __repr__(self):
+        return str(self.get_value()) + ' moedas'
+
+    def get_value(self):
+        return self.amount * self.price
+
 class Store:
     #TODO: a princípio o discount é uma tupla (desconto se vitória, aumento se perda)
     def __init__(self, discount):
@@ -20,18 +26,19 @@ class Store:
     def __init_itens(self):
         itens = []
         for i in range(ut.AMOUNT_ITENS_STORE):
-            itens.append(Item(
-                item = rand.choice(list(ut.STORE_ITENS)),
-                amount = rand.choice(ut.STORE_ITENS[item][0]),
-                price = rand.randint(ut.STORE_ITENS[item][1][0],ut.STORE_ITENS[item][1][1])
-            ))
-
+            rand_item = rand.randint(1, 100)
+            if rand_item <= ut.STORE_ITENS['Coracao'][0]:
+                item = 'Coracao'
+            else:
+                item = 'Passo'
+            amount = rand.choice(ut.STORE_ITENS[item][1])
+            price = rand.randint(ut.STORE_ITENS[item][2][0],ut.STORE_ITENS[item][2][1])
+            itens.append(Item(item, amount, price))
         return itens
 
     #TODO: lembrar de subtrair o valor no app e aplicar o efeito do item
     def validate_purchase(self, money, item):
-        if money - item.price >= 0:
-            self.itens.pop(item)
+        if money - item.get_value() >= 0:
             return True
         return False
 

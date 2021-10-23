@@ -1,6 +1,7 @@
 import utils as ut
 import room as rm
 import player as pl
+import store as st
 import quick_select as qs
 
 import random as rand
@@ -11,6 +12,7 @@ class Game:
     def __init__(self, initial_status):
         self.game_status = initial_status
         self.opened_store = False
+        self.store = st.Store((10, 20))
         self.size = ut.Vect2(ut.COLUMNS, ut.ROWS)
         self.graph = [[[0, False] for _ in range(self.size.x)] for _ in range(self.size.y)]
         self.rooms = self.__init_rooms()

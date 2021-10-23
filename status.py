@@ -1,6 +1,7 @@
 import utils as ut
 import game as gm
 import text as tx
+import button as bt
 
 import pyxel
 
@@ -61,12 +62,45 @@ def draw_playing(game, rooms_completed):
     tx.Centered_text(str(game.player.coins), 240, 7, 10).draw()
     tx.Centered_text(str(rooms_completed), 250, 7, 10).draw()
 
-def update_store(game):
+def generate_store_buttons(game):
+    buttons = []
+    for i in range(len(game.store.itens)):
+        item = game.store.itens[i]
+        buttons.append(bt.Normal_button(
+            len(str(item)) + (12 if item.get_value() < 10 else 8) + i * 58,
+            89, 
+            str(item)
+        ))
+    return buttons
+
+def update_store(game, buttons):
     if pyxel.btnp(pyxel.KEY_L):
         game.game_status = ut.PLAYING_STATUS
 
-def draw_store():
-    ...
+    for i in range(len(game.store.itens)):
+        button = buttons[i]
+        item = game.store.itens[i]
+        if button.update() == 1:
+            if game.store.validate_purchase(game.player.coins, item):
+                button.valid = False
+                game.player.coins -= item.get_value()
+                if item.item == 'Coracao':
+                    game.player.lifes += item.amount
+                    if game.player.lifes > 3: game.player.lifes = 3
+                elif item.item == 'Passo':
+                    game.player.remaining_steps += item.amount
+
+def draw_store(game, buttons):
+    for i in range(len(game.store.itens)):
+        item = game.store.itens[i]
+        tx.Centered_text(
+            item.item, 
+            10, 
+            10, 
+            10 + i * 58,
+        ).draw()
+        pyxel.blt(10 + i * 58, 20, 0, 0, 64, 48, 64, 0)
+        buttons[i].draw()
 
 def update_discount():
     ...
