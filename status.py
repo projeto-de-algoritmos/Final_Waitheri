@@ -114,17 +114,24 @@ def update_store(game, buttons):
 def draw_store(game, buttons):
     draw_frame_boarding()
     pyxel.blt(80, 25, 1, 104, 160, 199, 175)
-
     for i in range(len(game.store.itens)):
         item = game.store.itens[i]
-        tx.Centered_text(
-            item.item, 
-            70, 
-            10, 
-            18 + i * 58,
-        ).draw()
-        pyxel.blt(18 + i * 58, 80, 0, 0, 64, 48, 64, 0)
-
+        if buttons[i].valid:
+            tx.Centered_text(
+                item.item, 
+                70, 
+                10, 
+                18 + i * 58,
+            ).draw()
+            pyxel.blt(18 + i * 58, 80, 0, 48, 64, 48, 64, 0)
+            if item.item == 'Coracao':
+                pyxel.blt(18 + i * 58 + 16, 80 + 24, 0, 64, 0, 16, 16, 0)
+            else:
+                pyxel.blt(18 + i * 58 + 16, 80 + 24, 0, 64, 16, 16, 16, 2)
+            pyxel.blt(46 + i * 58, 134, 0, 80, 8, 8, 8, 0)
+            pyxel.blt(50 + i * 58, 125, 0, 72 + item.amount * 16, 0, 16, 16, 0)
+        else:
+            pyxel.blt(18 + i * 58, 80, 0, 0, 64, 48, 64, 0)
         buttons[i].draw()
 
     for i in range(len(game.store.itens), len(game.store.itens) + 1):
