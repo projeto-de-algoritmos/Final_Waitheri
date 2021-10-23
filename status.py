@@ -176,11 +176,16 @@ def draw_discount(game, buttons):
 def update_final(game, rooms_completed):
     ...
 
-def draw_final(game):
-    pyxel.blt((ut.TAM_SCREEN/2) - 60, 53, 1, 88, 136, 202, 151)
-    #TODO: adicionar quantidade de moedas coletadas
-    #TODO: adicionar quantidade de quartos percorridos
-    game.botao_final.draw()
+def draw_final(game, rooms_completed):
+    pyxel.blt(0, 0, 2, 0, 0, 256, 256, 0)
+    pyxel.blt((ut.TAM_SCREEN/2) - 60, 53, 1, 88, 136, 139, 15)
 
+    tx.Centered_text(str('Moedas coletadas'), 90, 10, ut.TAM_SCREEN/2 - 87).draw()
+    tx.Centered_text(str(game.player.coins_colected), 100, 10, ut.TAM_SCREEN/2 - 60).draw()
+
+    tx.Centered_text(str('Salas completadas'), 90, 3, ut.TAM_SCREEN/2 + 25).draw()
+    tx.Centered_text(str(rooms_completed), 100, 3, ut.TAM_SCREEN/2 + 60).draw()
+    
+    game.botao_final.draw()
 def draw_frame_boarding():
     pyxel.blt(0, 0, 2, 0, 0, 256, 256, 0)

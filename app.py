@@ -13,7 +13,7 @@ class App:
         pyxel.load("assets.pyxres")
 
         #  self.game = gm.Game(ut.MENU_STATUS)
-        self.game = gm.Game(ut.STORE_STATUS)
+        self.game = gm.Game(ut.FINAL_STATUS)
         self.rooms_completed = 0
         self.store_buttons = st.generate_store_buttons(self.game)
         self.discount_buttons = []
@@ -62,6 +62,6 @@ class App:
         elif self.game.game_status == ut.DISCOUNT_STATUS:
             st.draw_discount(self.game, self.discount_buttons)
         elif self.game.game_status == ut.FINAL_STATUS:
-            st.draw_final(self.game)
+            st.draw_final(self.game, self.rooms_completed)
 
 App()
