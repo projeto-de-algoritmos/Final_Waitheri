@@ -4,6 +4,7 @@ import status as st
 
 import pyxel
 
+
 class App:
     def __init__(self):
         pyxel.init(ut.TAM_SCREEN, ut.TAM_SCREEN, caption="")
@@ -11,8 +12,8 @@ class App:
         pyxel.mouse(True)
         pyxel.load("assets.pyxres")
 
-        #FIXME: Trocar para MENU_STATUS or PLAYING_STATUS
-        self.game = gm.Game(ut.MENU_STATUS)
+        #  self.game = gm.Game(ut.MENU_STATUS)
+        self.game = gm.Game(ut.STORE_STATUS)
         self.rooms_completed = 0
         self.store_buttons = st.generate_store_buttons(self.game)
 

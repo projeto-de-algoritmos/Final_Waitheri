@@ -9,6 +9,7 @@ class Player:
         self.pos = ut.Vect2(x, y)
         self.lifes = 3
         self.coins = 1000
+        self.coins_colected = 0
         self.remaining_steps = 0
         self.has_key = False
 
@@ -26,6 +27,7 @@ class Player:
     def __pick_coin(self, graph, x, y):
         graph[y][x][0] = 1
         self.remaining_steps -= 1
+        self.coins_colected += 1
         self.coins += 1
 
     def move_up(self, graph):

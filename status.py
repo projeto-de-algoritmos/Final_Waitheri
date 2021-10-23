@@ -14,7 +14,6 @@ def draw_menu(game):
     game.botao_start.draw()
     pyxel.blt((ut.TAM_SCREEN/2) - 60, 53, 1, 64, 8, 175, 108)
 
-
 def update_playing(game):
     if pyxel.btnp(pyxel.KEY_UP):
         game.player.move_up(game.graph)
@@ -34,8 +33,12 @@ def update_playing(game):
     if game.player.lifes <= 0:
         game.game_status = ut.FINAL_STATUS
 
-    if pyxel.btnp(pyxel.KEY_L) and not game.opened_store:
-        game.opened_store = True
+    # Caso se prefira abrir a loja apenas uma vez por quarto
+    #  if pyxel.btnp(pyxel.KEY_L) and not game.opened_store:
+    #      game.opened_store = True
+    #      game.game_status = ut.STORE_STATUS
+
+    if pyxel.btnp(pyxel.KEY_L):
         game.game_status = ut.STORE_STATUS
 
 def draw_playing(game, rooms_completed):
@@ -70,10 +73,22 @@ def generate_store_buttons(game):
     for i in range(len(game.store.itens)):
         item = game.store.itens[i]
         buttons.append(bt.Normal_button(
-            len(str(item)) + (12 if item.get_value() < 10 else 8) + i * 58,
-            89, 
+            len(str(item)) + (20 if item.get_value() < 10 else 16) + i * 58,
+            149, 
             str(item)
         ))
+    buttons.append(bt.Normal_button(
+        ut.TAM_SCREEN / 2 - len('Desconto') * pyxel.FONT_WIDTH + 20,
+        171, 
+        'Desconto'
+    ))
+
+    #TODO: Se der tempo adicionar o botão de restart das cartas
+    #  buttons.append(bt.Normal_button(
+    #      len(str(item)) + (20 if item.get_value() < 10 else 16) + i * 58,
+    #      169, 
+    #      str(item)
+    #  ))
     return buttons
 
 def update_store(game, buttons):
@@ -93,16 +108,22 @@ def update_store(game, buttons):
                 elif item.item == 'Passo':
                     game.player.remaining_steps += item.amount
 
+    if buttons[len(game.store.itens)].update() == 1:
+        game.game_status = ut.DISCOUNT_STATUS
+
 def draw_store(game, buttons):
     for i in range(len(game.store.itens)):
         item = game.store.itens[i]
         tx.Centered_text(
             item.item, 
+            70, 
             10, 
-            10, 
-            10 + i * 58,
+            18 + i * 58,
         ).draw()
-        pyxel.blt(10 + i * 58, 20, 0, 0, 64, 48, 64, 0)
+        pyxel.blt(18 + i * 58, 80, 0, 0, 64, 48, 64, 0)
+        buttons[i].draw()
+
+    for i in range(len(game.store.itens), len(game.store.itens) + 1):
         buttons[i].draw()
 
 def update_discount():
@@ -116,4 +137,6 @@ def update_final(game, rooms_completed):
 
 def draw_final(game):
     pyxel.blt((ut.TAM_SCREEN/2) - 60, 53, 1, 88, 136, 202, 151)
+    #TODO: adicionar quantidade de moedas coletadas
+    #TODO: adicionar quantidade de quartos percorridos
     game.botao_final.draw()
