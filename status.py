@@ -113,7 +113,7 @@ def update_store(game, buttons):
 
 def draw_store(game, buttons):
     draw_frame_boarding()
-    pyxel.blt(80, 25, 1, 104, 160, 199, 175)
+    pyxel.blt(80, 25, 1, 104, 160, 95, 18)
     for i in range(len(game.store.itens)):
         item = game.store.itens[i]
         if buttons[i].valid:
@@ -139,9 +139,9 @@ def draw_store(game, buttons):
 
 def generate_discount_buttons(game):
     buttons = []
-    buttons.append(bt.Normal_button(30 * 0 + 58, 10, str(1)))
-    buttons.append(bt.Normal_button(30 * 1 + 58, 10, str(game.discount_game.retira1)))
-    buttons.append(bt.Normal_button(30 * 2 + 58, 10, str(game.discount_game.retira2)))
+    buttons.append(bt.Normal_button(30 * 0 + 90, ut.TAM_SCREEN/2 + 40, str(1)))
+    buttons.append(bt.Normal_button(30 * 1 + 90, ut.TAM_SCREEN/2+ 40, str(game.discount_game.retira1)))
+    buttons.append(bt.Normal_button(30 * 2 + 90, ut.TAM_SCREEN/2+ 40, str(game.discount_game.retira2)))
     return buttons
 
 def update_discount(game, buttons, store_buttons):
@@ -170,8 +170,24 @@ def update_discount(game, buttons, store_buttons):
 #TODO: Ajeitar a posição dos botões
 def draw_discount(game, buttons):
     draw_frame_boarding()
+    pyxel.blt(ut.TAM_SCREEN/4 + 10, 30, 1, 121, 193, 108, 22)
+    
+    
     for button in buttons: button.draw()
-    tx.Centered_text(str(game.discount_game.qtdMoedas), 240, 7, 10).draw()
+    tx.Centered_text(('Quantidade de moedas restantes '+ str(game.discount_game.qtdMoedas)), ut.TAM_SCREEN/4 + 10, 7, ut.TAM_SCREEN/4).draw()
+    x_coin = (ut.TAM_SCREEN/2) - 40 + 3
+    y_coin = (ut.TAM_SCREEN/2) - 20 + 4
+    pyxel.blt(x_coin - 3, y_coin - 4, 1, 31, 200, 72, 48)
+    i = 0
+    for coin in range(1, game.discount_game.qtdMoedas + 1):
+        pyxel.blt(x_coin + (i*8), y_coin, 1, 50, 188, 4, 3)
+        if i == 6:
+            i = 0
+            y_coin += 4
+        else:
+            i += 1
+        
+        
 
 def update_final(game, rooms_completed):
     ...

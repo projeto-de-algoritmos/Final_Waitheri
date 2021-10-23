@@ -13,7 +13,7 @@ class App:
         pyxel.load("assets.pyxres")
 
         #  self.game = gm.Game(ut.MENU_STATUS)
-        self.game = gm.Game(ut.FINAL_STATUS)
+        self.game = gm.Game(ut.STORE_STATUS)
         self.rooms_completed = 0
         self.store_buttons = st.generate_store_buttons(self.game)
         self.discount_buttons = []
