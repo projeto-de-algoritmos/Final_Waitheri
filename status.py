@@ -15,7 +15,7 @@ def update_menu(game):
 def draw_menu(game):
     draw_frame_boarding()
     game.botao_start.draw()
-    pyxel.blt((ut.TAM_SCREEN/2) - 60, 53, 1, 64, 8, 175, 108)
+    pyxel.blt((ut.TAM_SCREEN/2) - 55, 53, 1, 64, 8, 175, 108)
 
 def update_playing(game):
     if pyxel.btnp(pyxel.KEY_UP):
