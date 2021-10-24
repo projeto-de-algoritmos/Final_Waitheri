@@ -61,18 +61,56 @@ QTD_ROOMS = 8
 ```
 
 - [Recomendado] Na geração dos pesos de cada quarto, é possível setar diferentes valores. Para isso deve-se utilizar as variáveis abaixo seguindo o formato esperado: (porcentagem desejada, valor na matriz)
-####ps.: Apenas as porcentagens de WALL e SPIKE devem ser alteradas, pois o cálculo é feito da seguinte forma: SPIKE <= valor, valor >= WALL > PER\_SPIKE e valor >= FLOOR > PER\_WALL.
+
+#### ps.: Apenas as porcentagens de WALL e SPIKE devem ser alteradas, pois o cálculo é feito da seguinte forma: SPIKE <= valor, valor >= WALL > PER\_SPIKE e valor >= FLOOR > PER\_WALL.
 ```python
 PER_FLOOR = (100, 1)
 PER_WALL = (49, 2)
 PER_SPIKE = (7, 3)
 ```
 
-- [Recomendado] Ao quebrar uma caixa existe a probabilidade de ser dropada uma moeda. Esse valor é setado na seguinte variável:
+[Recomendado] Ao quebrar uma caixa existe a probabilidade de ser dropada uma moeda. Esse valor é setado na seguinte variável:
 ```python
 PER_COIN = 30
 ```
 
-
+[Recomendado] Ao finalizar uma sala o jogador pode ser recompensado com uma quantidade aleatória de moedas. Esses possíveis valores podem ser alterados na seguinte variável:
 ```python
+COINS_PER_ROOM = [1, 4, 7, 10]
+```
+
+[Não Recomendado] Em toda loja uma quantidade de itens é mostrada ao jogador, sendo essa quantidade possível de ser alterada na seguinte variável:
+```python
+AMOUNT_ITENS_STORE = 4
+```
+
+[Recomendado] Uma lógica possível de alteração é a possibilidade de abrir a loja mais de uma vez por sala. A variável que controla isso é a seguinte:
+```python
+ONE_STORE_PER_ROOM = False
+```
+
+[Recomendado, Atenção] Toda loja possui uma lista única de itens que é gerada por sala. Os possíveis itens que podem aparecer na loja é controlada pela variável abaixo. Essa variável é um dicionário, em que as chaves indicam o nome que aparecerá na loja. Para cada item no dicionário deve-se seguir o seguinte formato: (probabilidade do item aparecer na loja, [possíveis quantidades], (preço mínimo, preço máximo))
+```python
+STORE_ITENS = {
+    "Coracao": (
+        30,
+        [1, 2],
+        (5, 7)
+    ),
+    "Passo": (
+        100,
+        [2, 3, 4],
+        (3, 7)
+    )
+}
+```
+
+- [Recomendado, Atenção] Ao se pedir um desconto na loja o jogo do moedeiro é ativo e alguns parâmetros são passados. Essas definições de possíveis jogos são descritas na seguinde variável, que deve seguir o seguinte padrão: [(desconto caso vitória, aumento caso derrota), (quantidade de moedas do jogo, quantidade de retirada 1, quantidade de retirada 2)]
+```python
+DISCOUNTS = [
+    ((2, 1), (14, 2, 5)),
+    ((3, 2), (10, 3, 4)),
+    ((4, 3), (15, 3, 6)),
+    ((5, 4), (17, 4, 5))
+]
 ```
