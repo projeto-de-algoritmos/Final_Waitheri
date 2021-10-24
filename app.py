@@ -41,6 +41,7 @@ class App:
             new_game = gm.Game(ut.PLAYING_STATUS)
             new_game.player.lifes = self.game.player.lifes
             new_game.player.coins= self.game.player.coins
+            new_game.player.coins_colected = self.game.player.coins_colected
             self.game = new_game
             self.store_buttons = st.generate_store_buttons(self.game)
 

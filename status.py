@@ -190,13 +190,17 @@ def update_final(game, rooms_completed):
 
 def draw_final(game, rooms_completed):
     pyxel.blt(0, 0, 2, 0, 0, 256, 256, 0)
-    pyxel.blt((ut.TAM_SCREEN/2) - 60, 53, 1, 88, 136, 139, 15)
+    pyxel.blt((ut.TAM_SCREEN/2) - 56, 53, 1, 88, 136, 139, 15)
 
-    tx.Centered_text(str('Moedas coletadas'), 90, 10, ut.TAM_SCREEN/2 - 87).draw()
-    tx.Centered_text(str(game.player.coins_colected), 100, 10, ut.TAM_SCREEN/2 - 60).draw()
+    string = 'Moedas coletadas'
+    tx.Centered_text(string, 90, 10, ut.TAM_SCREEN//2 - (len(string) * pyxel.FONT_WIDTH)//2).draw()
+    string = str(game.player.coins_colected)
+    tx.Centered_text(string, 100, 10, ut.TAM_SCREEN//2 - (len(string) * pyxel.FONT_WIDTH)//2).draw()
 
-    tx.Centered_text(str('Salas completadas'), 90, 3, ut.TAM_SCREEN/2 + 25).draw()
-    tx.Centered_text(str(rooms_completed), 100, 3, ut.TAM_SCREEN/2 + 60).draw()
+    string = 'Salas completas'
+    tx.Centered_text(string, 120, 3, ut.TAM_SCREEN//2 - (len(string) * pyxel.FONT_WIDTH)//2).draw()
+    string = str(rooms_completed)
+    tx.Centered_text(string, 130, 3, ut.TAM_SCREEN//2 - (len(string) * pyxel.FONT_WIDTH)//2).draw()
     
     game.botao_final.draw()
 
