@@ -30,7 +30,8 @@ MIN_HEIGHT_ROOM = 2
 # Opção de quantidade de quartos na geração
 QTD_ROOMS = 8
 
-# (porcentagem, valorNaMatriz)
+# Porcentagem de geração de cada tipo de chão no formato:
+#(porcentagem, valorNaMatriz)
 PER_FLOOR = (100, 1)
 PER_WALL = (49, 2)
 PER_SPIKE = (7, 3)
