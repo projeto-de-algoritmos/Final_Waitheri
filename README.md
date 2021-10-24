@@ -14,6 +14,17 @@
 Descreva os objetivos do seu projeto e como ele funciona. 
 
 ## Screenshots
+### Menu
+![menu](assets/menu.png)
+
+### Tela do jogo
+![jogo](assets/game.png)
+
+### Loja
+![loja](assets/loja.png)
+
+### Tela do moedeiro
+![moedeiro](assets/moedeiro.png)
 
 ## Instalação 
 **Linguagem**: python<br>
@@ -25,16 +36,16 @@ Descreva os objetivos do seu projeto e como ele funciona.
 pip install pyxel
 
 # Clonagem do repositório
-git clone git@github.com:projeto-de-algoritmos/PD_O-ultimo-moedeiro.git
+git@github.com:projeto-de-algoritmos/Final_Waitheri.git
 
 # Entre na pasta
-cd PD_O-ultimo-moedeiro
+cd Final_Waitheri
 ```
 
 ## Uso 
 - Após a instalação dos pré-requisitos é necessário rodar o seguinte comando:
 ```
-python app.py
+python src/app.py
 ```
 
 # Customização e Configuração
@@ -46,6 +57,7 @@ python app.py
 COLUMS = 15
 ROWS = 13
 ```
+</br>
 
 - Dentro da geração das salas pequenos quartos são pré-criados de maneira a dar forma ao quarto final. Seus tamanhos (largura e espessura) máximos e mínimos podem ser alterados pelas seguintes variáveis:
 ```python
@@ -54,42 +66,49 @@ MAX_HEIGHT_ROOM = 2
 MIN_WIDTH_ROOM = 2
 MIN_HEIGHT_ROOM = 2
 ```
+</br>
 
 - Ainda em relação a pré-criação dos quartos é possível alterar a quantidade de salas geradas através da seguinte variável
 ```python
 QTD_ROOMS = 8
 ```
+</br>
 
 - [Recomendado] Na geração dos pesos de cada quarto, é possível setar diferentes valores. Para isso deve-se utilizar as variáveis abaixo seguindo o formato esperado: (porcentagem desejada, valor na matriz)
 
-#### ps.: Apenas as porcentagens de WALL e SPIKE devem ser alteradas, pois o cálculo é feito da seguinte forma: SPIKE <= valor, valor >= WALL > PER\_SPIKE e valor >= FLOOR > PER\_WALL.
+- <b>ps.: Apenas as porcentagens de WALL e SPIKE devem ser alteradas, pois o cálculo é feito da seguinte forma: SPIKE <= valor, valor >= WALL > PER\_SPIKE e valor >= FLOOR > PER\_WALL.</b>
 ```python
 PER_FLOOR = (100, 1)
 PER_WALL = (49, 2)
 PER_SPIKE = (7, 3)
 ```
+</br>
 
-[Recomendado] Ao quebrar uma caixa existe a probabilidade de ser dropada uma moeda. Esse valor é setado na seguinte variável:
+- [Recomendado] Ao quebrar uma caixa existe a probabilidade de ser dropada uma moeda. Esse valor é setado na seguinte variável:
 ```python
 PER_COIN = 30
 ```
+</br>
 
-[Recomendado] Ao finalizar uma sala o jogador pode ser recompensado com uma quantidade aleatória de moedas. Esses possíveis valores podem ser alterados na seguinte variável:
+- [Recomendado] Ao finalizar uma sala o jogador pode ser recompensado com uma quantidade aleatória de moedas. Esses possíveis valores podem ser alterados na seguinte variável:
 ```python
 COINS_PER_ROOM = [1, 4, 7, 10]
 ```
+</br>
 
-[Não Recomendado] Em toda loja uma quantidade de itens é mostrada ao jogador, sendo essa quantidade possível de ser alterada na seguinte variável:
+- [Não Recomendado] Em toda loja uma quantidade de itens é mostrada ao jogador, sendo essa quantidade possível de ser alterada na seguinte variável:
 ```python
 AMOUNT_ITENS_STORE = 4
 ```
+</br>
 
-[Recomendado] Uma lógica possível de alteração é a possibilidade de abrir a loja mais de uma vez por sala. A variável que controla isso é a seguinte:
+- [Recomendado] Uma lógica possível de alteração é a possibilidade de abrir a loja mais de uma vez por sala. A variável que controla isso é a seguinte:
 ```python
 ONE_STORE_PER_ROOM = False
 ```
+</br>
 
-[Recomendado, Atenção] Toda loja possui uma lista única de itens que é gerada por sala. Os possíveis itens que podem aparecer na loja é controlada pela variável abaixo. Essa variável é um dicionário, em que as chaves indicam o nome que aparecerá na loja. Para cada item no dicionário deve-se seguir o seguinte formato: (probabilidade do item aparecer na loja, [possíveis quantidades], (preço mínimo, preço máximo))
+- [Recomendado, Atenção] Toda loja possui uma lista única de itens que é gerada por sala. Os possíveis itens que podem aparecer na loja é controlada pela variável abaixo. Essa variável é um dicionário, em que as chaves indicam o nome que aparecerá na loja. Para cada item no dicionário deve-se seguir o seguinte formato: (probabilidade do item aparecer na loja, [possíveis quantidades], (preço mínimo, preço máximo))
 ```python
 STORE_ITENS = {
     "Coracao": (
@@ -104,6 +123,7 @@ STORE_ITENS = {
     )
 }
 ```
+</br>
 
 - [Recomendado, Atenção] Ao se pedir um desconto na loja o jogo do moedeiro é ativo e alguns parâmetros são passados. Essas definições de possíveis jogos são descritas na seguinde variável, que deve seguir o seguinte padrão: [(desconto caso vitória, aumento caso derrota), (quantidade de moedas do jogo, quantidade de retirada 1, quantidade de retirada 2)]
 ```python
