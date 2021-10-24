@@ -63,10 +63,7 @@ def draw_playing(game, rooms_completed):
                 pyxel.blt(8 + 16*i, 8 + 16*j, 0, 0, 48, 16, 16, 0)
 
     draw_frame_boarding()
-    tx.Centered_text(str(game.player.lifes), 220, 7, 10).draw()
-    tx.Centered_text(str(game.player.remaining_steps), 230, 7, 10).draw()
-    tx.Centered_text(str(game.player.coins), 240, 7, 10).draw()
-    tx.Centered_text(str(rooms_completed), 250, 7, 10).draw()
+    draw_player_status(game)
 
 #TODO: Se der tempo adicionar o botão de resetar cartas
 def generate_store_buttons(game):
@@ -137,6 +134,8 @@ def draw_store(game, buttons):
     for i in range(len(game.store.itens), len(game.store.itens) + 1):
         buttons[i].draw()
 
+    draw_player_status(game)
+
 def generate_discount_buttons(game):
     buttons = []
     buttons.append(bt.Normal_button(30 * 0 + 90, ut.TAM_SCREEN/2 + 40, str(1)))
@@ -167,7 +166,6 @@ def update_discount(game, buttons, store_buttons):
             store_buttons[i].update_value(str(game.store.itens[i]))
         store_buttons[4].valid = False
 
-#TODO: Ajeitar a posição dos botões
 def draw_discount(game, buttons):
     draw_frame_boarding()
     pyxel.blt(ut.TAM_SCREEN/4 + 10, 30, 1, 121, 193, 108, 22)
@@ -186,8 +184,6 @@ def draw_discount(game, buttons):
             y_coin += 4
         else:
             i += 1
-        
-        
 
 def update_final(game, rooms_completed):
     ...
@@ -203,5 +199,26 @@ def draw_final(game, rooms_completed):
     tx.Centered_text(str(rooms_completed), 100, 3, ut.TAM_SCREEN/2 + 60).draw()
     
     game.botao_final.draw()
+
 def draw_frame_boarding():
     pyxel.blt(0, 0, 2, 0, 0, 256, 256, 0)
+
+def draw_player_status(game):
+    for i in range(game.player.lifes):
+        pyxel.blt(16 + i * 18, 224, 0, 64, 0, 16, 16, 0)
+
+    pyxel.blt(78, 224, 0, 16, 0, 16, 16, 0)
+    pyxel.blt(96, 233, 0, 80, 24, 8, 8, 0)
+    moedas = str(game.player.coins)
+    for i in range(len(moedas)):
+        num = int(moedas[i])
+        if num == 0: num = 10
+        pyxel.blt(99 + i * 11, 224, 0, 88 + (num - 1) * 16, 16, 16, 16, 0)
+
+    pyxel.blt(156, 224, 0, 64, 16, 16, 16, 2)
+    pyxel.blt(174, 233, 0, 80, 40, 8, 8, 0)
+    passos = str(game.player.remaining_steps)
+    for i in range(len(passos)):
+        num = int(passos[i])
+        if num == 0: num = 10
+        pyxel.blt(177 + i * 11, 224, 0, 88 + (num - 1) * 16, 32, 16, 16, 0)
