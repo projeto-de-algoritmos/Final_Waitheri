@@ -3,11 +3,12 @@ import utils as ut
 import status as st
 
 import pyxel
+import random as rand
 
 
 class App:
     def __init__(self):
-        pyxel.init(ut.TAM_SCREEN, ut.TAM_SCREEN, caption="")
+        pyxel.init(ut.TAM_SCREEN, ut.TAM_SCREEN, caption="WAITHERI")
         
         pyxel.mouse(True)
         pyxel.load("assets.pyxres")
@@ -38,6 +39,7 @@ class App:
 
         if self.game.game_status == ut.NEW_ROOM_STATUS:
             self.rooms_completed += 1
+            self.game.player.coins += rand.choice(ut.COINS_PER_ROOM)
             new_game = gm.Game(ut.PLAYING_STATUS)
             new_game.player.lifes = self.game.player.lifes
             new_game.player.coins= self.game.player.coins

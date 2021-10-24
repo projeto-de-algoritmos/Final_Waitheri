@@ -38,6 +38,9 @@ PER_SPIKE = (7, 3)
 # Porcentagem de cair moeda quando quebrar a caixa
 PER_COIN = 30
 
+# Possíveis recompensas de moedas a cada quarto.
+COINS_PER_ROOM = [i for i in range(1, 6)]
+
 # Quantidade de itens na loja (recomendado deixar no máximo 4)
 AMOUNT_ITENS_STORE = 4
 

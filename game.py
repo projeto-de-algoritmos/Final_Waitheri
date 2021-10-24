@@ -74,9 +74,9 @@ class Game:
         return important_rooms
 
     def __generate_middle_room(self):
-        important_rooms_y = self.__find_rooms(1, 0, 1, len(self.rooms) - 1)
+        important_rooms_y = self.__find_rooms(1, 0, len(self.rooms) - 1)
         width = self.important_rooms[2].pos.x - self.important_rooms[0].pos.x
-        height = important_rooms_y[2].pos.y - important_rooms_y[0].pos.y
+        height = important_rooms_y[1].pos.y - important_rooms_y[0].pos.y
 
         room = rm.Room(
             self.important_rooms[0].pos.x + self.important_rooms[0].size.x//2,
