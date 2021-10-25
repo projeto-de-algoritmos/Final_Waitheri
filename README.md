@@ -14,6 +14,9 @@
 Descreva os objetivos do seu projeto e como ele funciona. 
 
 ## Screenshots
+### Gameplay
+![gameplaye](assets/gameplay.gif)
+
 ### Menu
 ![menu](assets/menu.png)
 
