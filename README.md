@@ -11,7 +11,14 @@
 | 19/0030879 |  João Pedro Moura Oliveira |
 
 ## Sobre 
-Descreva os objetivos do seu projeto e como ele funciona. 
+Bem vindo ao jogo Waitheri, o fantasma babão. Infelizmente Waitheri está passando por um problema, ele está perdendo suas características de fantasma e não consegue atravessar as coisas. Então ele precisa de sua ajuda para pegar a chave e conseguir sair da sala através do alçapão. CUIDADO! Você não deve atravessar espinhos e também não deve utilizar mais passos que o necessário, pois irá perder sua vida.
+
+Durante o jogo é utilizado 4 estruturas que englobam a disciplina. Grafos, Consulta em O(1) Memoization (Programação dinâmica), quickselect e busca em grafo por dijkstra.
+
+- Grafos: Para o controle posicional do mapa;
+- Memoization: Para dar o desconto ao jogador;
+- Quickselect: Para buscar salas específicas, com o intuito de gerar itens e o personagem principal. Para fazer a junção de todas as salas (Explicado melhor no vídeo de apresentação).
+- Dijkstra: Para definir a quantidade de passos de cada sala, calculando o melhor caminho do personagem principal até a chave e depois da chave até o alçapão.
 
 ## Screenshots
 ### Gameplay
