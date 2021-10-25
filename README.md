@@ -16,11 +16,11 @@
 ## Sobre 
 Bem vindo ao jogo Waitheri, o fantasma babão. Infelizmente Waitheri está passando por um problema, ele está perdendo suas características de fantasma e não consegue atravessar as coisas. Então ele precisa de sua ajuda para pegar a chave e conseguir sair da sala através do alçapão. CUIDADO! Você não deve atravessar espinhos e também não deve utilizar mais passos que o necessário, pois irá perder sua vida.
 
-Durante o jogo é utilizado 4 estruturas que englobam a disciplina. Grafos, Consulta em O(1) Memoization (Programação dinâmica), quickselect e busca em grafo por dijkstra.
+Durante o jogo são utilizadas 4 técnicas que foram abordadas durante a disciplina. Grafos, Busca em grafos por Dijkstra (Grafos 2), Programação Dinâmica e Dividir e Conquistar com o quickselect.
 
-- Grafos: Para o controle posicional do mapa;
-- Memoization: Para dar o desconto ao jogador;
-- Quickselect: Para buscar salas específicas, com o intuito de gerar itens e o personagem principal. Para fazer a junção de todas as salas (Explicado melhor no vídeo de apresentação).
+- Grafos: Para o controle posicional do mapa, onde através de uma matriz que armazena dados sobre o peso do nó e se ele já foi visitado, é possível o acesso em O(1);
+- Programação Dinâmica: Para dar um sentido ao jogo apresentado no desconto da loja. Nele é utiliza-se um algorótimo O(n) já apresentado pela equipe em [O Último Moedeiro](https://github.com/projeto-de-algoritmos/PD_O-ultimo-moedeiro);
+- Dividir e Conquistar: Utilização do algorítmo de Quickselect, que possui uma complexidade O(n) no melhor caso, para busca de salas específicas com o intuito de gerar itens e o personagem principal. Sua utilização se faz presente também na geração da sala final (explicação detalhada no vídeo);
 - Dijkstra: Para definir a quantidade de passos de cada sala, calculando o melhor caminho do personagem principal até a chave e depois da chave até o alçapão.
 
 ## Screenshots
